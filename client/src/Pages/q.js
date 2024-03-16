@@ -16,10 +16,11 @@ export default () => {
   const [prev, setPrev] = useState(0); // Previous value {numeric}
   const [answers, setAnswers] = useState({
     members: 0,
-    per_person_drink: 1,
+    per_person_drink: false,
     isPurified: false,
     isConsumedBottledWater: undefined,
     bottledWaterFreq: false,
+    showerTime: false,
     question3: 0,
     question4: 0,
     question5: 0,
@@ -34,14 +35,13 @@ export default () => {
    * @returns {number} - run status
    */
   const computeTf = (answers) => {
-    //alert("Recomputing tf");
     let computedTf = 0;
-    if (answers.per_person_drink !== undefined) {
+    if (answers.per_person_drink) {
       computedTf += members * parseFloat(answers.per_person_drink);
     }
 
     if (answers.isPurified === "yes") {
-      computedTf += 3 * computedTf;
+      computedTf += 3 * members * parseFloat(answers.per_person_drink);
     }
 
     if (answers.bottledWaterFreq) {
@@ -54,7 +54,9 @@ export default () => {
       };
       computedTf += members * multiplier[answers.bottledWaterFreq];
     }
-
+    if (answers.showerTime) {
+      computedTf += 5 * members * parseFloat(answers.showerTime);
+    }
     return computedTf;
   };
   // Function to handle form submission
@@ -116,9 +118,11 @@ export default () => {
       });
     }
     if (q === "q4") {
-      setAnswers((prevState) => ({ ...prevState, question0: value }));
-      setTf(parseFloat(tf) + parseFloat(value));
-      alert(answers);
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, showerTime: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
     }
     if (q === "q5") {
       setAnswers((prevState) => ({ ...prevState, question0: value }));
@@ -330,7 +334,7 @@ export default () => {
                 onChange={(e) => {
                   const water = e.target.value;
                   setPrev(water);
-                  handleInputChange(water, "q1");
+                  handleInputChange(water, "q4");
                 }}
               />
             </div>
