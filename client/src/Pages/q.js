@@ -18,7 +18,7 @@ export default () => {
     members: 0,
     per_person_drink: 1,
     isPurified: false,
-    isConsumedBottledWater: false,
+    isConsumedBottledWater: undefined,
     bottledWaterFreq: false,
     question3: 0,
     question4: 0,
@@ -30,12 +30,10 @@ export default () => {
 
   // Function which return tf given the answers
   /**
-   *
    * @param {object} answers
    * @returns {number} - run status
    */
   const computeTf = (answers) => {
-    console.log("recomputing");
     let computedTf = 0;
     if (answers.per_person_drink !== undefined) {
       computedTf += members * parseFloat(answers.per_person_drink);
@@ -45,8 +43,16 @@ export default () => {
       computedTf += members * 3 * answers.per_person_drink;
     }
 
-    if (answers.bottledWaterFreq !== undefined) {
-      computedTf += 2;
+    if (answers.bottledWaterFreq) {
+      alert(answers.bottledWaterFreq);
+      const multiplier = {
+        daily: 1.32,
+        weeklyOnce: 0.18,
+        twiceAWeek: 0.37,
+        severalTimesAWeek: 0.56,
+        never: 0,
+      };
+      computedTf += members * multiplier[answers.bottledWaterFreq];
     }
 
     return computedTf;
@@ -106,7 +112,7 @@ export default () => {
 
     if (q === "q3") {
       setAnswers((prevState) => {
-        const updatedAnswers = { ...prevState, question0: value };
+        const updatedAnswers = { ...prevState, bottledWaterFreq: value };
         setTf(computeTf(updatedAnswers));
         return updatedAnswers;
       });
@@ -273,8 +279,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(1.32 * members + tf);
-                    setAnswers([...answers, 1.32 * members]);
+                    handleInputChange("daily", "q2");
                   }}
                 >
                   Daily
@@ -282,8 +287,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(0.18 * members + tf);
-                    setAnswers([...answers, 0.18 * members]);
+                    handleInputChange("weeklyOnce", "q2");
                   }}
                 >
                   Weekly Once
@@ -291,8 +295,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(0.37 * members + tf);
-                    setAnswers([...answers, 0.37 * members]);
+                    handleInputChange("twiceAWeek", "q2");
                   }}
                 >
                   Twice a week
@@ -300,8 +303,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   nClick={() => {
-                    setTf(0.56 * members + tf);
-                    setAnswers([...answers, 0.56 * members]);
+                    handleInputChange("severalTimesAWeek", "q2");
                   }}
                 >
                   Several times a week
@@ -309,7 +311,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setAnswers([...answers, 0 * members]);
+                    handleInputChange("never", "q2");
                   }}
                 >
                   Never
