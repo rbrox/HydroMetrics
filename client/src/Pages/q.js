@@ -21,6 +21,7 @@ export default () => {
     isConsumedBottledWater: undefined,
     bottledWaterFreq: false,
     showerTime: false,
+    showerCount: "1",
     question3: 0,
     question4: 0,
     question5: 0,
@@ -55,8 +56,13 @@ export default () => {
       computedTf += members * multiplier[answers.bottledWaterFreq];
     }
     if (answers.showerTime) {
-      computedTf += 5 * members * parseFloat(answers.showerTime);
+      computedTf +=
+        5 *
+        members *
+        parseFloat(answers.showerTime) *
+        parseFloat(answers.showerCount);
     }
+
     return computedTf;
   };
   // Function to handle form submission
@@ -125,9 +131,11 @@ export default () => {
       });
     }
     if (q === "q5") {
-      setAnswers((prevState) => ({ ...prevState, question0: value }));
-      setTf(tf + prev * value);
-      alert(answers);
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, showerCount: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
     }
     if (q === "q6") {
       setAnswers((prevState) => ({ ...prevState, question0: value }));
@@ -351,7 +359,7 @@ export default () => {
                 max="45"
                 onChange={(e) => {
                   const water = e.target.value;
-                  handleInputChange(water, "q2");
+                  handleInputChange(water, "q5");
                 }}
               />
             </div>
