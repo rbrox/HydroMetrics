@@ -22,7 +22,7 @@ export default () => {
     bottledWaterFreq: false,
     showerTime: false,
     showerCount: "1",
-    question3: 0,
+    lowShowerTaps: "no",
     question4: 0,
     question5: 0,
     question6: 0,
@@ -56,11 +56,19 @@ export default () => {
       computedTf += members * multiplier[answers.bottledWaterFreq];
     }
     if (answers.showerTime) {
-      computedTf +=
-        5 *
-        members *
-        parseFloat(answers.showerTime) *
-        parseFloat(answers.showerCount);
+      if (answers.lowShowerTaps === "no") {
+        computedTf +=
+          5 *
+          members *
+          parseFloat(answers.showerTime) *
+          parseFloat(answers.showerCount);
+      } else {
+        computedTf +=
+          1.5 *
+          members *
+          parseFloat(answers.showerTime) *
+          parseFloat(answers.showerCount);
+      }
     }
 
     return computedTf;
@@ -138,9 +146,11 @@ export default () => {
       });
     }
     if (q === "q6") {
-      setAnswers((prevState) => ({ ...prevState, question0: value }));
-      setTf(parseFloat(tf) + parseFloat(value));
-      alert(answers);
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, lowShowerTaps: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
     }
     if (q === "q8") {
       setAnswers((prevState) => ({ ...prevState, question0: value }));
@@ -379,8 +389,7 @@ export default () => {
                       id="super-happy3"
                       value="yes"
                       onClick={() => {
-                        setTf(tf - prev * 0.35);
-                        setAnswers([...answers, 1]);
+                        handleInputChange("yes", "q6");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -396,8 +405,7 @@ export default () => {
                       id="super-sad3"
                       value="no"
                       onClick={(e) => {
-                        console.log(e.target.value);
-                        setAnswers([...answers, 0]);
+                        handleInputChange("no", "q6");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
