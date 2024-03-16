@@ -34,17 +34,18 @@ export default () => {
    * @returns {number} - run status
    */
   const computeTf = (answers) => {
+    //alert("Recomputing tf");
     let computedTf = 0;
     if (answers.per_person_drink !== undefined) {
       computedTf += members * parseFloat(answers.per_person_drink);
     }
 
     if (answers.isPurified === "yes") {
-      computedTf += members * 3 * answers.per_person_drink;
+      computedTf += computedTf * 3;
     }
 
     if (answers.bottledWaterFreq) {
-      alert(answers.bottledWaterFreq);
+      //alert(answers.bottledWaterFreq);
       const multiplier = {
         daily: 1.32,
         weeklyOnce: 0.18,
@@ -99,15 +100,13 @@ export default () => {
       });
     }
     if (q === "q2") {
-      if (setAnswers.length === 2) {
-        setAnswers((prevState) => {
-          const updatedAnswers = {
-            ...prevState,
-            isConsumedBottledWater: value,
-          };
-          return updatedAnswers;
-        });
-      }
+      setAnswers((prevState) => {
+        const updatedAnswers = {
+          ...prevState,
+          isConsumedBottledWater: value,
+        };
+        return updatedAnswers;
+      });
     }
 
     if (q === "q3") {
@@ -279,7 +278,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    handleInputChange("daily", "q2");
+                    handleInputChange("daily", "q3");
                   }}
                 >
                   Daily
@@ -287,7 +286,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    handleInputChange("weeklyOnce", "q2");
+                    handleInputChange("weeklyOnce", "q3");
                   }}
                 >
                   Weekly Once
@@ -295,7 +294,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    handleInputChange("twiceAWeek", "q2");
+                    handleInputChange("twiceAWeek", "q3");
                   }}
                 >
                   Twice a week
@@ -303,7 +302,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   nClick={() => {
-                    handleInputChange("severalTimesAWeek", "q2");
+                    handleInputChange("severalTimesAWeek", "q3");
                   }}
                 >
                   Several times a week
@@ -311,7 +310,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    handleInputChange("never", "q2");
+                    handleInputChange("never", "q3");
                   }}
                 >
                   Never
