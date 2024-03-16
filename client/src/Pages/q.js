@@ -23,7 +23,7 @@ export default () => {
     showerTime: false,
     showerCount: "1",
     lowShowerTaps: "no",
-    question4: 0,
+    tapRunoffTime: false,
     question5: 0,
     question6: 0,
     question7: 0,
@@ -69,6 +69,10 @@ export default () => {
           parseFloat(answers.showerTime) *
           parseFloat(answers.showerCount);
       }
+    }
+
+    if (answers.tapRunoffTime) {
+      computedTf += 4 * parseFloat(answers.tapRunoffTime);
     }
 
     return computedTf;
@@ -148,6 +152,13 @@ export default () => {
     if (q === "q6") {
       setAnswers((prevState) => {
         const updatedAnswers = { ...prevState, lowShowerTaps: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q7") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, tapRunoffTime: value };
         setTf(computeTf(updatedAnswers));
         return updatedAnswers;
       });
@@ -427,7 +438,7 @@ export default () => {
                 type="number"
                 min="1"
                 max="45"
-                oncChange={(e) => handleInputChange(e.target.value, "q3")}
+                oncChange={(e) => handleInputChange(e.target.value, "q7")}
               />
             </div>
           </SwiperSlide>
