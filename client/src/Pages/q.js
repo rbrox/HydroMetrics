@@ -41,11 +41,10 @@ export default () => {
     }
 
     if (answers.isPurified === "yes") {
-      computedTf += computedTf * 3;
+      computedTf += 3 * computedTf;
     }
 
     if (answers.bottledWaterFreq) {
-      //alert(answers.bottledWaterFreq);
       const multiplier = {
         daily: 1.32,
         weeklyOnce: 0.18,
