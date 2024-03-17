@@ -30,11 +30,11 @@ export default () => {
     laundryRoutine: false,
     laundryCount: "1",
     cleanHousehold: false,
-    waterUsedPlants: 0,
+    waterUsedPlants: false,
     isDessertPlants: "no",
     vehicleCount: 0,
-    vehicleWashRoutine: false,
-    vehicleWashFreq: false,
+    vehicleWashRoutine: "never",
+    vehicleWashFreq: "weekly",
     isPlasticRecycled: "no",
     isPaperRecycled: "no",
     isClothRecycled: "no",
@@ -113,7 +113,42 @@ export default () => {
       computedTf += 55 * parseFloat(answers.laundryCount);
     }
 
-    return computedTf;
+    if (answers.cleanHousehold) {
+      const multiplier = {
+        daily: 8,
+        weekly: (1 / 7) * 8,
+        monthly: (1 / 30) * 8,
+        never: 0,
+      };
+      computedTf += members * multiplier[answers.cleanHousehold];
+    }
+
+    if (answers.waterUsedPlants) {
+      computedTf += parseFloat(answers.waterUsedPlants);
+    }
+    if (answers.isDessertPlants === "yes") {
+      computedTf -= 3.5;
+    }
+
+    if (answers.vehicleCount) {
+      const multiplier = {
+        carWash: 60,
+        DIY: 150,
+        professional: 60,
+        never: 0,
+      };
+      const multiplier1 = {
+        weekly: 1 / 7,
+        monthly: 1 / 30,
+        monthly2: 1 / 60,
+      };
+      computedTf +=
+        parseFloat(answers.vehicleCount) *
+        multiplier1[answers.vehicleWashFreq] *
+        multiplier[answers.vehicleWashRoutine];
+    }
+
+    return computedTf.toFixed(2);
   };
 
   // Function to handle form submission
@@ -936,7 +971,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    handleInputChange("2monthly", "q18");
+                    handleInputChange("monthly2", "q18");
                   }}
                 >
                   Twice A Month
