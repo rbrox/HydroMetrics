@@ -24,6 +24,7 @@ export default () => {
     showerCount: "1",
     lowShowerTaps: "no",
     tapRunoffTime: false,
+    lowRunoffTaps: "no",
     question5: 0,
     question6: 0,
     question7: 0,
@@ -72,7 +73,11 @@ export default () => {
     }
 
     if (answers.tapRunoffTime) {
-      computedTf += 4 * parseFloat(answers.tapRunoffTime);
+      if (answers.lowRunoffTaps === "yes") {
+        computedTf += 0.5 * parseFloat(answers.tapRunoffTime);
+      } else {
+        computedTf += 4 * parseFloat(answers.tapRunoffTime);
+      }
     }
 
     return computedTf;
@@ -164,9 +169,11 @@ export default () => {
       });
     }
     if (q === "q8") {
-      setAnswers((prevState) => ({ ...prevState, question0: value }));
-      setPrev(value);
-      alert(answers);
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, lowRunoffTaps: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
     }
   }, 500);
 
@@ -362,7 +369,6 @@ export default () => {
                 max="45"
                 onChange={(e) => {
                   const water = e.target.value;
-                  setPrev(water);
                   handleInputChange(water, "q4");
                 }}
               />
@@ -438,7 +444,10 @@ export default () => {
                 type="number"
                 min="1"
                 max="45"
-                oncChange={(e) => handleInputChange(e.target.value, "q7")}
+                onChange={(e) => {
+                  const water = e.target.value;
+                  handleInputChange(water, "q7");
+                }}
               />
             </div>
           </SwiperSlide>
@@ -457,8 +466,7 @@ export default () => {
                       id="super-happy4"
                       value="yes"
                       onClick={() => {
-                        setTf(tf - prev * 0.35);
-                        setAnswers([...answers, 1]);
+                        handleInputChange("yes", "q8");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -474,8 +482,7 @@ export default () => {
                       id="super-sad4"
                       value="no"
                       onClick={(e) => {
-                        console.log(e.target.value);
-                        setAnswers([...answers, 0]);
+                        handleInputChange("no", "q8");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
