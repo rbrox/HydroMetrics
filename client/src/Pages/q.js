@@ -502,7 +502,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setAnswers([...answers, 0]);
+                    handleInputChange("no", "q9");
                   }}
                 >
                   No, dishes aren't washed in our household
@@ -510,8 +510,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 25);
-                    setAnswers([...answers, 25]);
+                    handleInputChange("yesHand", "q9");
                   }}
                 >
                   Yes, Handwashing
@@ -519,8 +518,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 13);
-                    setAnswers([...answers, 13]);
+                    handleInputChange("yesDish", "q9");
                   }}
                 >
                   Yes, with Dishwasher
@@ -538,7 +536,7 @@ export default () => {
                 type="number"
                 min="1"
                 max="45"
-                onChange={(e) => handleInputChange(e.target.value, "q4")}
+                onChange={(e) => handleInputChange(e.target.value, "q10")}
               />
             </div>
           </SwiperSlide>
@@ -549,8 +547,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setPrev(35);
-                    setAnswers([...answers, 35]);
+                    handleInputChange("hand", "q11");
                   }}
                 >
                   Wash by hand
@@ -558,8 +555,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setPrev(130);
-                    setAnswers([...answers, 130]);
+                    handleInputChange("machine", "q11");
                   }}
                 >
                   Old school washing machines
@@ -567,8 +563,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setPrev(55);
-                    setAnswers([...answers, 55]);
+                    handleInputChange("efficient", "q11");
                   }}
                 >
                   Water/Energy efficient washing machines
@@ -587,7 +582,10 @@ export default () => {
                 type="number"
                 min="1"
                 max="45"
-                onChange={(e) => handleInputChange(e.target.value, "q5")}
+                onChange={(e) => {
+                  const water = e.target.value;
+                  handleInputChange(water, "q12");
+                }}
               />
             </div>
           </SwiperSlide>
@@ -600,8 +598,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 8);
-                    setAnswers([...answers, 8]);
+                    handleInputChange("daily", "q13");
                   }}
                 >
                   Daily
@@ -609,8 +606,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 1.17);
-                    setAnswers([...answers, 1.17]);
+                    handleInputChange("weekly", "q13");
                   }}
                 >
                   Weekly
@@ -618,8 +614,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 0.26);
-                    setAnswers([...answers, 0.26]);
+                    handleInputChange("monthly", "q13");
                   }}
                 >
                   Monthly
@@ -627,8 +622,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 0);
-                    setAnswers([...answers, 0]);
+                    handleInputChange("never", "q13");
                   }}
                 >
                   Never
@@ -646,7 +640,10 @@ export default () => {
                 type="number"
                 min="1"
                 max="45"
-                onChange={(e) => handleInputChange(e.target.value, "q6")}
+                onChange={(e) => {
+                  const water = e.target.value;
+                  handleInputChange(water, "q14");
+                }}
               />
             </div>
           </SwiperSlide>
@@ -663,8 +660,7 @@ export default () => {
                       id="super-happy5"
                       value="yes"
                       onClick={() => {
-                        setTf(tf - 3.5);
-                        setAnswers([...answers, 1]);
+                        handleInputChange("yes", "q15");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -680,8 +676,7 @@ export default () => {
                       id="super-sad5"
                       value="no"
                       onClick={(e) => {
-                        console.log(e.target.value);
-                        setAnswers([...answers, 0]);
+                        handleInputChange("no", "q15");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -701,8 +696,8 @@ export default () => {
                 min="1"
                 max="6"
                 onChange={(e) => {
-                  setPrev(e.target.value);
-                  setAnswers([...answers, e.target.value]);
+                  const water = e.target.value;
+                  handleInputChange(water, "q16");
                 }}
               />
             </div>
@@ -716,9 +711,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 60 * prev);
-                    setPrev((prev) => 60 * prev);
-                    setAnswers([...answers, 60 * prev]);
+                    handleInputChange("carWash", "q17");
                   }}
                 >
                   Car Wash
@@ -726,9 +719,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 150 * prev);
-                    setPrev((prev) => 150 * prev);
-                    setAnswers([...answers, 150 * prev]);
+                    handleInputChange("DIY", "q17");
                   }}
                 >
                   DIY Scrub
@@ -736,9 +727,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 60 * prev);
-                    setPrev((prev) => 60 * prev);
-                    setAnswers([...answers, 60 * prev]);
+                    handleInputChange("professional", "q17");
                   }}
                 >
                   Professional service
@@ -746,9 +735,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + 0 * prev);
-                    setPrev(1);
-                    setAnswers([...answers, 0]);
+                    handleInputChange("never", "q17");
                   }}
                 >
                   Never
@@ -765,8 +752,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + prev / 7);
-                    setAnswers([...answers, prev / 7]);
+                    handleInputChange("weekly", "q18");
                   }}
                 >
                   Weekly
@@ -774,8 +760,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + prev / 30);
-                    setAnswers([...answers, prev / 30]);
+                    handleInputChange("monthly", "q18");
                   }}
                 >
                   Monthly
@@ -783,8 +768,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setTf(tf + (prev * 2) / 30);
-                    setAnswers([...answers, (prev * 2) / 30]);
+                    handleInputChange("2monthly", "q18");
                   }}
                 >
                   Twice A Month
@@ -805,8 +789,7 @@ export default () => {
                       id="super-happy6"
                       value="yes"
                       onClick={() => {
-                        setTf(tf - members * 0.15);
-                        setAnswers([...answers, 1]);
+                        handleInputChange("yes", "q19");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -822,8 +805,7 @@ export default () => {
                       id="super-sad6"
                       value="no"
                       onClick={() => {
-                        setTf(tf + members * 0.15);
-                        setAnswers([...answers, 0]);
+                        handleInputChange("no", "q19");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -847,8 +829,7 @@ export default () => {
                       id="super-happy7"
                       value="yes"
                       onClick={() => {
-                        setTf(tf - members * 0.45);
-                        setAnswers([...answers, 1]);
+                        handleInputChange("yes", "q20");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -864,8 +845,7 @@ export default () => {
                       id="super-sad7"
                       value="no"
                       onClick={() => {
-                        setTf(tf + members * 0.45);
-                        setAnswers([...answers, 0]);
+                        handleInputChange("no", "q20");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -889,8 +869,7 @@ export default () => {
                       id="super-happy8"
                       value="yes"
                       onClick={() => {
-                        setTf(tf - members * 1.22);
-                        setAnswers([...answers, 1]);
+                        handleInputChange("yes", "q21");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -906,8 +885,7 @@ export default () => {
                       id="super-sad8"
                       value="no"
                       onClick={() => {
-                        setTf(tf + members * 1.22);
-                        setAnswers([...answers, 0]);
+                        handleInputChange("no", "q21");
                       }}
                     />
                     <svg viewBox="0 0 24 24">
@@ -927,9 +905,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setPrev(1500);
-                    setAnswers([...answers, 1500]);
-                    setTf(tf + prev);
+                    handleInputChange("vegan", "q22");
                   }}
                 >
                   Vegan
@@ -937,9 +913,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setPrev(2000);
-                    setAnswers([...answers, 2000]);
-                    setTf(tf + prev);
+                    handleInputChange("vegetarian", "q22");
                   }}
                 >
                   Vegetarian
@@ -947,9 +921,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setPrev(2200);
-                    setAnswers([...answers, 2200]);
-                    setTf(tf + prev);
+                    handleInputChange("semiVegetarian", "q22");
                   }}
                 >
                   Semi-Vegetarian
@@ -957,7 +929,7 @@ export default () => {
                 <div
                   className="slide-btn"
                   onClick={() => {
-                    setPrev(3500);
+                    handleInputChange("nonVegetarian", "q22");
                   }}
                 >
                   Non-Vegetarian
@@ -974,8 +946,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  if (prev === 3500) setAnswers([...answers, prev * members]);
-                  setTf(tf + prev * members);
+                  handleInputChange("daily", "q23");
                 }}
               >
                 Daily
@@ -983,9 +954,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  if (prev === 3500)
-                    setAnswers([...answers, prev * 0.57 * members]);
-                  setTf(tf + prev * 0.57 * members);
+                  handleInputChange("weeklyOnce", "q23");
                 }}
               >
                 Several times a week
@@ -993,9 +962,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  if (prev === 3500)
-                    setAnswers([...answers, prev * 0.14 * members]);
-                  setTf(tf + prev * 0.14 * members);
+                  handleInputChange("twiceAWeek", "q23");
                 }}
               >
                 Weekly once
@@ -1003,9 +970,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  if (prev === 3500)
-                    setAnswers([...answers, prev * 0.06 * members]);
-                  setTf(tf + prev * 0.06 * members);
+                  handleInputChange("ocassionally", "q23");
                 }}
               >
                 Ocassionally
@@ -1013,8 +978,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  if (prev === 3500) setAnswers([...answers, prev * members]);
-                  setTf(tf + prev * members);
+                  handleInputChange("never", "q23");
                 }}
               >
                 Never
@@ -1029,8 +993,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.89 * 1 * members]);
-                  setTf(tf + 0.89 * 1 * members);
+                  handleInputChange("daily", "q24");
                 }}
               >
                 Daily
@@ -1038,8 +1001,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.89 * 0.5 * members]);
-                  setTf(tf + 0.89 * 0.5 * members);
+                  handleInputChange("weeklyOnce", "q24");
                 }}
               >
                 Several times a week
@@ -1047,8 +1009,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.89 * 0.1 * members]);
-                  setTf(tf + 0.89 * 0.1 * members);
+                  handleInputChange("twiceAWeek", "q24");
                 }}
               >
                 Weekly once
@@ -1056,8 +1017,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.89 * 1 * members]);
-                  setTf(tf + 0.06 * 1 * members);
+                  handleInputChange("ocassionally", "q24");
                 }}
               >
                 Ocassionally
@@ -1065,8 +1025,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.89 * 0 * members]);
-                  setTf(tf + 0.89 * 0 * members);
+                  handleInputChange("never", "q24");
                 }}
               >
                 Never
@@ -1081,8 +1040,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.95 * 1 * members]);
-                  setTf(tf + 0.95 * 1 * members);
+                  handleInputChange("daily", "q25");
                 }}
               >
                 Daily
@@ -1090,8 +1048,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.95 * 0.5 * members]);
-                  setTf(tf + 0.95 * 0.5 * members);
+                  handleInputChange("several", "q25");
                 }}
               >
                 Several times a week
@@ -1099,8 +1056,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.95 * 0.14 * members]);
-                  setTf(tf + 0.95 * 0.14 * members);
+                  handleInputChange("weeklyOnce", "q25");
                 }}
               >
                 Weekly once
@@ -1108,8 +1064,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.95 * 0.06 * members]);
-                  setTf(tf + 0.95 * 0.06 * members);
+                  handleInputChange("ocassionally", "q25");
                 }}
               >
                 Ocassionally
@@ -1117,8 +1072,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, 0.95 * 0 * members]);
-                  setTf(tf + 0.95 * 0 * members);
+                  handleInputChange("never", "q25");
                 }}
               >
                 Never
@@ -1134,7 +1088,8 @@ export default () => {
                 min="1"
                 max="6"
                 onChange={(e) => {
-                  handleInputChange(e.target.value, "q8");
+                  const water = e.target.value;
+                  handleInputChange(water, "q26");
                 }}
               />
             </div>
@@ -1147,8 +1102,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, prev * 1 * 23]);
-                  setTf(tf + prev * 1 * 23);
+                  handleInputChange("daily", "q27");
                 }}
               >
                 Daily
@@ -1156,8 +1110,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, prev * 0.14 * 23]);
-                  setTf(tf + prev * 0.14 * 23);
+                  handleInputChange("weeklyOnce", "q27");
                 }}
               >
                 Once a week
@@ -1165,8 +1118,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, prev * 0.28 * 23]);
-                  setTf(tf + prev * 0.28 * 23);
+                  handleInputChange("twiceAWeek", "q27");
                 }}
               >
                 Weekly twice
@@ -1174,8 +1126,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, prev * 0.03 * 23]);
-                  setTf(tf + prev * 0.03 * 23);
+                  handleInputChange("ocassionally", "q27");
                 }}
               >
                 Once a month
@@ -1183,8 +1134,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, prev * 0.06 * 23]);
-                  setTf(tf + prev * 0.06 * 23);
+                  handleInputChange("2mounth", "q27");
                 }}
               >
                 Twice a month
@@ -1192,8 +1142,7 @@ export default () => {
               <div
                 className="slide-btn"
                 onClick={() => {
-                  setAnswers([...answers, prev * 0 * 23]);
-                  setTf(tf + prev * 0 * 23);
+                  handleInputChange("never", "q27");
                 }}
               >
                 Never
