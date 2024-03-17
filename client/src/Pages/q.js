@@ -28,7 +28,7 @@ export default () => {
     isDishWashed: "no",
     waterUsedDishwasher: 0,
     laundryRoutine: false,
-    laundryCount: 0,
+    laundryCount: "1",
     cleanHousehold: false,
     waterUsedPlants: 0,
     isDessertPlants: "no",
@@ -95,8 +95,27 @@ export default () => {
       }
     }
 
+    if (answers.isDishWashed === "yesHand") {
+      computedTf += 25;
+    } else if (answers.isDishWashed === "yesDish") {
+      computedTf += 13;
+    }
+
+    if (answers.waterUsedDishwasher) {
+      computedTf += parseFloat(answers.waterUsedDishwasher);
+    }
+
+    if (answers.laundryRoutine === "hand") {
+      computedTf += 35 * parseFloat(answers.laundryCount);
+    } else if (answers.laundryRoutine === "machine") {
+      computedTf += 130 * parseFloat(answers.laundryCount);
+    } else if (answers.laundryRoutine === "efficient") {
+      computedTf += 55 * parseFloat(answers.laundryCount);
+    }
+
     return computedTf;
   };
+
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -281,49 +300,43 @@ export default () => {
         return updatedAnswers;
       });
     }
+
     if (q === "q22") {
-      setAnswers((prevState) => {
-        const updatedAnswers = { ...prevState, waterUsedPlants: value };
-        setTf(computeTf(updatedAnswers));
-        return updatedAnswers;
-      });
-    }
-    if (q === "q23") {
       setAnswers((prevState) => {
         const updatedAnswers = { ...prevState, dietType: value };
         setTf(computeTf(updatedAnswers));
         return updatedAnswers;
       });
     }
-    if (q === "q24") {
+    if (q === "q23") {
       setAnswers((prevState) => {
         const updatedAnswers = { ...prevState, meatFreq: value };
         setTf(computeTf(updatedAnswers));
         return updatedAnswers;
       });
     }
-    if (q === "q25") {
+    if (q === "q24") {
       setAnswers((prevState) => {
         const updatedAnswers = { ...prevState, dairyFreq: value };
         setTf(computeTf(updatedAnswers));
         return updatedAnswers;
       });
     }
-    if (q === "q26") {
+    if (q === "q25") {
       setAnswers((prevState) => {
         const updatedAnswers = { ...prevState, beverageFreq: value };
         setTf(computeTf(updatedAnswers));
         return updatedAnswers;
       });
     }
-    if (q === "q27") {
+    if (q === "q26") {
       setAnswers((prevState) => {
         const updatedAnswers = { ...prevState, petCount: value };
         setTf(computeTf(updatedAnswers));
         return updatedAnswers;
       });
     }
-    if (q === "q28") {
+    if (q === "q27") {
       setAnswers((prevState) => {
         const updatedAnswers = { ...prevState, petWashFreq: value };
         setTf(computeTf(updatedAnswers));
@@ -332,7 +345,7 @@ export default () => {
     }
   }, 500);
 
-  // Element to be returned (the quiz component!)
+  // Element to be returned  (the quiz component!)
   return (
     <>
       <Navbar></Navbar>
