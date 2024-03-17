@@ -25,10 +25,25 @@ export default () => {
     lowShowerTaps: "no",
     tapRunoffTime: false,
     lowRunoffTaps: "no",
-    question5: 0,
-    question6: 0,
-    question7: 0,
-    question8: 0,
+    isDishWashed: "no",
+    waterUsedDishwasher: 0,
+    laundryRoutine: false,
+    laundryCount: 0,
+    cleanHousehold: false,
+    waterUsedPlants: 0,
+    isDessertPlants: "no",
+    vehicleCount: 0,
+    vehicleWashRoutine: false,
+    vehicleWashFreq: false,
+    isPlasticRecycled: "no",
+    isPaperRecycled: "no",
+    isClothRecycled: "no",
+    dietType: false,
+    meatFreq: false,
+    dairyFreq: false,
+    beverageFreq: false,
+    petCount: 0,
+    petWashFreq: false,
   }); // Answers {array}
 
   // Function which return tf given the answers
@@ -171,6 +186,146 @@ export default () => {
     if (q === "q8") {
       setAnswers((prevState) => {
         const updatedAnswers = { ...prevState, lowRunoffTaps: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q9") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, isDishWashed: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q10") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, waterUsedDishwasher: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q11") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, laundryRoutine: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q12") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, laundryCount: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q13") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, cleanHousehold: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q14") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, waterUsedPlants: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q15") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, isDessertPlants: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q16") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, vehicleCount: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q17") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, vehicleWashRoutine: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q18") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, vehicleWashFreq: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q19") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, isPlasticRecycled: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q20") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, isPaperRecycled: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q21") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, isClothRecycled: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q22") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, waterUsedPlants: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q23") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, dietType: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q24") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, meatFreq: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q25") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, dairyFreq: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q26") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, beverageFreq: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q27") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, petCount: value };
+        setTf(computeTf(updatedAnswers));
+        return updatedAnswers;
+      });
+    }
+    if (q === "q28") {
+      setAnswers((prevState) => {
+        const updatedAnswers = { ...prevState, petWashFreq: value };
         setTf(computeTf(updatedAnswers));
         return updatedAnswers;
       });
